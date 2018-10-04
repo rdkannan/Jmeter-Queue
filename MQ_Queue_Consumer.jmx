@@ -1,0 +1,2252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1 r1770033">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="AMQP Event Merged V3" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="FlightScheduleChanged_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_FlightScheduleChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">
+{
+
+    &quot;header&quot;: {
+
+        &quot;messageName&quot;: &quot;FlightScheduleChanged&quot;,
+
+        &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+
+        &quot;messageGenerationTimestamp&quot;: &quot;2016-18-01T00:00:00Z&quot;,
+
+        &quot;messageProducerName&quot;: &quot;Abstraction Layer&quot;,
+
+        &quot;operationType&quot;: &quot;CREATE&quot;
+
+    },
+
+    &quot;body&quot;: {
+
+        &quot;flightKey&quot;: &quot;20160529PVKLGW8370&quot;,
+
+        &quot;flightNumber&quot;: &quot;8370&quot;,
+
+        &quot;depAirportCode&quot;: &quot;GTW&quot;,
+
+        &quot;arrAirportCode&quot;: &quot;ALC&quot;,
+
+        &quot;depTerminalCode&quot;: &quot;N&quot;,
+
+        &quot;arrTerminalCode&quot;: &quot;&quot;,
+
+        &quot;carrierCode&quot;: &quot;EZY&quot;,
+
+        &quot;checkInStatus&quot;: &quot;OF&quot;,
+
+        &quot;lockKey&quot;: &quot;false&quot;,
+
+        &quot;postedToAccountingFlag&quot;: &quot;false&quot;,
+
+        &quot;localDepDtTm&quot;: &quot;2016-05-29T13:15:00&quot;,
+
+        &quot;localArrDtTm&quot;: &quot;2016-05-29T13:15:00&quot;,
+
+        &quot;equipmentCode&quot;: &quot;A320&quot;,
+
+        &quot;capacity&quot;: 180,
+
+        &quot;seatsSold&quot;: 133,
+
+        &quot;lid&quot;: 190,
+
+        &quot;iropLid&quot;: 180
+
+    }
+
+}
+</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_FlightScheduleChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightScheduleChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestHybris</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Seating Consumer_FlightScheduleChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightScheduleChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestSeating</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="FlightInventoryChanged_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_FlightInventoryChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">
+{
+
+  header: {
+
+    messageName: &quot;FlightInventoryChanged&quot;,
+
+    messageVersion: &quot;1.0&quot;,
+
+    messageGenerationTimestamp: &quot;2016-18-01T00:00:00Z&quot;,
+
+    messageProducerName: &quot;Abstraction Layer&quot;,
+
+    operationType: &quot;UPDATE&quot;
+
+  },
+
+  body: {
+
+    flightKey: &quot;20160424AJALGWFAKE&quot;,
+
+    capacity: 180,
+
+    seatsSold: 134,
+
+    lid: 186,
+
+    iropLid: 180,
+
+    infantsLid: 20,
+
+    infantsSold: 10
+
+  }
+
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_FlightInventoryChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightInventoryChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="FlightFareClassInventoryChanged_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_FlightFareClassInventoryChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_FlightFareClassInventoryChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightFareClassInventoryChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="DisruptedFlightsChanged_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_DisruptedFlightsChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_DisruptedFlightsChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_DisruptedFlightsChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="FlightFareClassPriceChanged_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_FlightFareClassPriceChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  header: {
+    messageName: &quot;FlightFareClassPriceChanged&quot;,
+    messageVersion: &quot;1.0&quot;,
+    messageGenerationTimestamp: &quot;2016-18-01T00:00:00Z&quot;,
+    messageProducerName: &quot;Abstraction Layer&quot;,
+    operationType: &quot;CREATE&quot;
+  },
+  body: {
+      flightKey: &quot;20160529PVKLGW8370&quot;,
+      fareClassCode: &quot;B&quot;,
+      currencyCode: &quot;GBP&quot;,
+      extendedPrice: &quot;20.00&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_FlightFareClassPriceChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightFareClassPriceChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="AdvancePassengerInformationUpdatedInLegacySystem_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_AdvancePassengerInformationUpdatedInLegacySystem.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_AdvancePassengerInformationUpdatedInLegacySystem_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_AdvancePassengerInformationUpdatedInLegacySystem.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BoardingPassGeneratedAtAirport_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_BoardingPassGeneratedAtAirport.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">&quot;header&quot;: {
+&quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+&quot;messageVersion&quot;: &quot;1.0.0&quot;,
+&quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+&quot;messageProducerName&quot;: &quot;ACP&quot;,
+&quot;operationType&quot;: &quot;UPDATE&quot;
+},
+&quot;body&quot;: {
+&quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+&quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+ }</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_BoardingPassGeneratedAtAirport_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_BoardingPassGeneratedAtAirport.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="PassengerCheckedIn_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_PassengerCheckedIn.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_PassengerCheckedIn_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_PassengerCheckedIn.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BookingCreated_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_BookingCreated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">Sending Queue  messages for MockQueue.........</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">JMSXGroupID</stringProp>
+                <stringProp name="JMSProperty.value"></stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_BookingCreated_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_BookingCreated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BoardingPassGenerated_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_BoardingPassGenerated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_BoardingPassGenerated_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_BoardingPassGenerated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="CustomerRegistered_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_CustomerRegistered.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_CustomerRegistered_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_CustomerRegistered.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BookingUpdated_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_BookingUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+&quot;message&quot;:{
+&quot;header&quot;:{
+&quot;messageName&quot;:&quot;BookingUpdated&quot;,
+&quot;messageVersion&quot;:&quot;1.0&quot;,
+&quot;messageGeneratedTimestamp&quot;:&quot;2016-08-04T13:04:33Z&quot;,
+&quot;messageProducerName&quot;:&quot;Hybris&quot;,
+&quot;operationType&quot;:&quot;Update&quot;
+},
+&quot;body&quot;:{
+&quot;bookingReference&quot;:&quot;F5D32N&quot;,
+&quot;flights&quot;:[
+{
+&quot;flightKey&quot;:&quot;20160424BSLAJA9917&quot;,
+&quot;passengers&quot;:[
+{
+&quot;name&quot;:{
+&quot;firstName&quot;:&quot;John&quot;,
+&quot;lastName&quot;:&quot;McPhearson Jr.&quot;,
+&quot;middleName&quot;:&quot;Henry&quot;,
+&quot;title&quot;:&quot;Mr&quot;
+},
+&quot;passengerType&quot;:&quot;ADULT&quot;,
+&quot;age&quot;:43,
+&quot;allocatedFareClass&quot;:&quot;T&quot;,
+&quot;passengerId&quot;:&quot;90687544&quot;
+&quot;passengerOnFlightId&quot;:&quot;62837623&quot;,
+&quot;lead&quot;:true,
+&quot;serviceRequests&quot;:[
+{
+&quot;ssrCode&quot;:&quot;BLND&quot;
+},{
+&quot;ssrCode&quot;:&quot;MAAS&quot;
+}
+],
+&quot;holdItems&quot;:[
+{
+&quot;holdItemType&quot;:&quot;Luggage&quot;,
+&quot;weightInKg&quot;:25,
+&quot;offerPrice&quot;:{
+&quot;amount&quot;: 19.99,
+&quot;currency&quot;:&quot;GBP&quot;
+}
+}
+],
+&quot;seat&quot;:{
+&quot;seatNumber&quot;:&quot;13C&quot;,
+&quot;offerPrice&quot;:{
+&quot;amount&quot;:15.00,
+&quot;currency&quot;:&quot;GBP&quot;
+}
+},
+&quot;rightToFlyPrice&quot;:{
+&quot;amount&quot;:145.50,
+&quot;currency&quot;:&quot;GBP&quot;
+},
+&quot;infantOnLap&quot;:{
+&quot;name&quot;:{
+&quot;fullName&quot;:&quot;Little Jimmy McPhearson&quot;
+},
+&quot;age&quot;:1
+}
+}
+]
+}
+],
+&quot;totalPrice&quot;:{
+&quot;amount&quot;:215.48,
+&quot;currency&quot;:&quot;GBP&quot;
+},
+&quot;bookingContact&quot;:{
+&quot;name&quot;:{
+&quot;fullName&quot;:&quot;Mr J Anderson&quot;
+},
+&quot;emailAddress&quot;:&quot;janderson@blagger.com&quot;,
+&quot;phone&quot;:&quot;+44878099000&quot;
+}
+}
+}
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">com.bookingupdatedv1.queue.produce</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_BookingUpdated_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_BookingUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer.AL.VirtualTopic.com.bookingupdatedv1</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="PassengerICTSCheckStatusUpdated_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_PassengerICTSCheckStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;PassengerITCSCheckStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: [
+    {
+      &quot;passengerOnFlightId&quot;: &quot;000234420121024LISFNC7609001&quot;,
+      &quot;messages&quot;: [
+        {
+          &quot;messageStatusCode&quot;: 2,
+          &quot;messageCode&quot;: 1001,
+          &quot;passengerGUID&quot;: &quot;21a9f478-52f8-41b1-857d-41dd3c59a251&quot;
+        },
+        {
+          &quot;messageStatusCode&quot;: 2,
+          &quot;messageCode&quot;: 9002,
+          &quot;passengerGUID&quot;: &quot;21a9f478-52f8-41b1-857d-41dd3c59a251&quot;
+        },
+      ],
+      &quot;manualInterventionFlag&quot;: false,
+      &quot;rejectedFlag&quot;: false
+    }
+  ]
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">com.passengerictscheckstatusupdatedv1.queue.produce</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_PassengerICTSCheckStatusUpdated_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_PassengerICTSCheckStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer.AL.VirtualTopic.com.passengerictscheckstatusupdatedv1</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="CustomerAccountChanged_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_CustomerAccountChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{  
+   &quot;header&quot;:{  
+      &quot;messageName&quot;:&quot;customerAccountChanged_event&quot;,
+      &quot;messageVersion&quot;:&quot;1.0.0&quot;,
+      &quot;messageGenerationTimestamp&quot;:&quot;2016-12-13T12:12:12&quot;,
+      &quot;messageProducerName&quot;:&quot;ACP&quot;,
+      &quot;operationType&quot;:&quot;UPDATE&quot;
+   },
+   &quot;body&quot;:{  
+      &quot;personalDetails&quot;:{  
+         &quot;customerId&quot;:&quot;MHN123456&quot;,
+         &quot;email&quot;:&quot;john.smith@some_email.com&quot;,
+         &quot;status&quot;:&quot;ACTIVE&quot;,
+         &quot;type&quot;:&quot;adult&quot;,
+         &quot;age&quot;:23,
+         &quot;group&quot;:&quot;CUSTOMER_GROUP&quot;,
+         &quot;title&quot;:&quot;mr&quot;,
+         &quot;firstName&quot;:&quot;John&quot;,
+         &quot;lastName&quot;:&quot;Smith&quot;,
+         &quot;ejPlusCardNumber&quot;:&quot;1234567&quot;,
+         &quot;nifNumber&quot;:&quot;8767655&quot;,
+         &quot;phoneNumber&quot;:&quot;7740123854&quot;,
+         &quot;alternativePhoneNumber&quot;:&quot;0200123821&quot;,
+         &quot;flightClubId&quot;:&quot;543443&quot;,
+         &quot;flightClubExpiryDate&quot;:&quot;2016-11-08&quot;,
+         &quot;employeeId&quot;:&quot;645444&quot;,
+         &quot;employeeEmail&quot;:&quot;j.smith@easyjet.com&quot;,
+         &quot;keyDates&quot;:[  
+            {  
+               &quot;type&quot;:&quot;graduation&quot;,
+               &quot;month&quot;:&quot;01&quot;,
+               &quot;year&quot;:&quot;2018&quot;
+            }
+         ]
+      },
+      &quot;contactAddress&quot;:[  
+         {  
+            &quot;addressLine1&quot;:&quot;52, Main Street&quot;,
+            &quot;addressLine2&quot;:&quot;Flat 2B&quot;,
+            &quot;addressLine3&quot;:&quot;&quot;,
+            &quot;city&quot;:&quot;Oxford&quot;,
+            &quot;county_state&quot;:&quot;Oxfordshire&quot;,
+            &quot;country&quot;:&quot;GBR&quot;,
+            &quot;postalCode&quot;:&quot;OX11 2ES&quot;
+         }
+      ],
+      &quot;savedPayments&quot;:{  
+         &quot;savedCards&quot;:[  
+            {  
+               &quot;code&quot;:&quot;6755452&quot;,
+               &quot;type&quot;:&quot;CARD&quot;,
+               &quot;default&quot;:true,
+               &quot;validToMonth&quot;:&quot;01&quot;,
+               &quot;validToYear&quot;:&quot;2018&quot;,
+               &quot;validFromMonth&quot;:&quot;01&quot;,
+               &quot;validFromYear&quot;:&quot;2015&quot;,
+               &quot;lastFourDigits&quot;:&quot;6532&quot;
+            }
+         ]
+      },
+      &quot;savedPassengers&quot;:[  
+         {  
+            &quot;code&quot;:&quot;767564&quot;,
+            &quot;type&quot;:&quot;ADULT&quot;,
+            &quot;title&quot;:&quot;mrs&quot;,
+            &quot;firstName&quot;:&quot;Mary&quot;,
+            &quot;lastName&quot;:&quot;Smith&quot;,
+            &quot;email&quot;:&quot;mary.smith@some_email.com&quot;,
+            &quot;ejPlusCardNumber&quot;:&quot;8776665&quot;,
+            &quot;nifNumber&quot;:&quot;8767655&quot;,
+            &quot;flightClubId&quot;:&quot;1234455&quot;,
+            &quot;flightClubExpiryDate&quot;:&quot;2016-10-14&quot;,
+            &quot;identityDocuments&quot;:[  
+               {  
+                  &quot;name&quot;:{  
+                     &quot;firstName&quot;:&quot;Mary&quot;,
+                     &quot;lastName&quot;:&quot;Smith&quot;,
+                     &quot;fullName&quot;:&quot;Mary Smith&quot;,
+                     &quot;middleName&quot;:&quot;&quot;,
+                     &quot;title&quot;:&quot;mrs&quot;
+                  },
+                  &quot;dateOfBirth&quot;:&quot;2016-10-14&quot;,
+                  &quot;documentExpiryDate&quot;:&quot;2020-10-14&quot;,
+                  &quot;documentNumber&quot;:&quot;163563454&quot;,
+                  &quot;documentType&quot;:&quot;passport&quot;,
+                  &quot;gender&quot;:&quot;female&quot;,
+                  &quot;nationality&quot;:&quot;GBR&quot;,
+                  &quot;countryOfIssue&quot;:&quot;GBR&quot;
+               }
+            ],
+            &quot;savedSSRs&quot;:{  
+               &quot;ssrs&quot;:[  
+                  &quot;WCHR&quot;
+               ],
+               &quot;remarks&quot;:[  
+                  {  
+                     &quot;code&quot;:&quot;00564545&quot;,
+                     &quot;description&quot;:&quot;Allergic to nuts&quot;
+                  }
+               ]
+            }
+         }
+      ],
+      &quot;recentSearches&quot;:[  
+         {  
+            &quot;outbound&quot;:{  
+               &quot;code&quot;:&quot;LTN&quot;,
+               &quot;name&quot;:&quot;Luton Airport&quot;,
+               &quot;marketGroup&quot;:&quot;london&quot;,
+               &quot;terminal&quot;:&quot;T1&quot;
+            },
+            &quot;inbound&quot;:{  
+               &quot;code&quot;:&quot;BCN&quot;,
+               &quot;name&quot;:&quot;Barcelona&quot;,
+               &quot;marketGroup&quot;:&quot;&quot;,
+               &quot;terminal&quot;:&quot;T2&quot;
+            },
+            &quot;passengerMix&quot;:[  
+               {  
+                  &quot;type&quot;:&quot;adult&quot;,
+                  &quot;quantity&quot;:2
+               }
+            ]
+         }
+      ],
+      &quot;flightInterests&quot;:[  
+         {  
+            &quot;flightKey&quot;:&quot;20121024LISFNC7609&quot;,
+            &quot;flightNumber&quot;:&quot;EZY1244&quot;,
+            &quot;carrier&quot;:&quot;EZY&quot;,
+            &quot;departureDateTime&quot;:&quot;2016-10-14T09:42:00&quot;,
+            &quot;arrivalDateTime&quot;:&quot;2016-10-20T09:42:00&quot;,
+            &quot;sector&quot;:{  
+               &quot;code&quot;:&quot;LTNBCN&quot;,
+               &quot;departure&quot;:{  
+                  &quot;code&quot;:&quot;LTN&quot;,
+                  &quot;name&quot;:&quot;Luton Airport&quot;,
+                  &quot;marketGroup&quot;:&quot;london&quot;,
+                  &quot;terminal&quot;:&quot;T1&quot;
+               },
+               &quot;arrival&quot;:{  
+                  &quot;code&quot;:&quot;BCN&quot;,
+                  &quot;name&quot;:&quot;Barcelona&quot;,
+                  &quot;marketGroup&quot;:&quot;&quot;,
+                  &quot;terminal&quot;:&quot;T2&quot;
+               }
+            },
+            &quot;fareTypes&quot;:[  
+               {  
+                  &quot;code&quot;:&quot;flexi&quot;
+               }
+            ]
+         }
+      ],
+      &quot;identityDocuments&quot;:[  
+         {  
+            &quot;name&quot;:{  
+               &quot;firstName&quot;:&quot;John&quot;,
+               &quot;lastName&quot;:&quot;Smith&quot;,
+               &quot;fullName&quot;:&quot;John Smith&quot;,
+               &quot;middleName&quot;:&quot;&quot;,
+               &quot;title&quot;:&quot;mr&quot;
+            },
+            &quot;dateOfBirth&quot;:&quot;2016-10-14&quot;,
+            &quot;documentExpiryDate&quot;:&quot;2020-10-14&quot;,
+            &quot;documentNumber&quot;:&quot;163563454&quot;,
+            &quot;documentType&quot;:&quot;passport&quot;,
+            &quot;gender&quot;:&quot;male&quot;,
+            &quot;nationality&quot;:&quot;GBR&quot;,
+            &quot;countryOfIssue&quot;:&quot;GBR&quot;
+         }
+      ],
+      &quot;savedSSRs&quot;:{  
+         &quot;ssrs&quot;:[  
+
+         ],
+         &quot;remarks&quot;:[  
+
+         ]
+      },
+      &quot;significantOthers&quot;:{  
+         &quot;remainingChanges&quot;:5,
+         &quot;changesEndDate&quot;:&quot;2016-10-14&quot;,
+         &quot;passengers&quot;:[  
+            {  
+               &quot;code&quot;:&quot;767564&quot;,
+               &quot;type&quot;:&quot;child&quot;,
+               &quot;title&quot;:&quot;mr&quot;,
+               &quot;firstName&quot;:&quot;Joe&quot;,
+               &quot;lastName&quot;:&quot;Smith&quot;,
+               &quot;email&quot;:&quot;joe.smith@some_email.com&quot;,
+               &quot;ejPlusCardNumber&quot;:&quot;8776665&quot;,
+               &quot;nifNumber&quot;:&quot;8767655&quot;,
+               &quot;flightClubId&quot;:&quot;1234455&quot;,
+               &quot;flightClubExpiryDate&quot;:&quot;2016-10-14&quot;,
+               &quot;identityDocuments&quot;:[  
+                  {  
+                     &quot;name&quot;:{  
+                        &quot;firstName&quot;:&quot;Joe&quot;,
+                        &quot;lastName&quot;:&quot;Smith&quot;,
+                        &quot;fullName&quot;:&quot;&quot;,
+                        &quot;middleName&quot;:&quot;&quot;,
+                        &quot;title&quot;:&quot;mr&quot;
+                     },
+                     &quot;dateOfBirth&quot;:&quot;2016-10-14&quot;,
+                     &quot;documentExpiryDate&quot;:&quot;2020-10-14&quot;,
+                     &quot;documentNumber&quot;:&quot;163563454&quot;,
+                     &quot;documentType&quot;:&quot;passport&quot;,
+                     &quot;gender&quot;:&quot;male&quot;,
+                     &quot;nationality&quot;:&quot;GBR&quot;,
+                     &quot;countryOfIssue&quot;:&quot;GBR&quot;
+                  }
+               ],
+               &quot;savedSSRs&quot;:{  
+                  &quot;ssrs&quot;:[  
+
+                  ],
+                  &quot;remarks&quot;:[  
+
+                  ]
+               }
+            }
+         ]
+      },
+      &quot;dependents&quot;:[  
+         {  
+            &quot;code&quot;:&quot;767564&quot;,
+            &quot;type&quot;:&quot;infant&quot;,
+            &quot;title&quot;:&quot;miss&quot;,
+            &quot;firstName&quot;:&quot;Emma&quot;,
+            &quot;lastName&quot;:&quot;Smith&quot;,
+            &quot;email&quot;:&quot;emma.smith@some_email.com&quot;,
+            &quot;ejPlusCardNumber&quot;:&quot;8776665&quot;,
+            &quot;nifNumber&quot;:&quot;8767655&quot;,
+            &quot;flightClubId&quot;:&quot;1234455&quot;,
+            &quot;flightClubExpiryDate&quot;:&quot;2016-10-14&quot;,
+            &quot;identityDocuments&quot;:[  
+               {  
+                  &quot;name&quot;:{  
+                     &quot;firstName&quot;:&quot;Emma&quot;,
+                     &quot;lastName&quot;:&quot;Smith&quot;,
+                     &quot;fullName&quot;:&quot;&quot;,
+                     &quot;middleName&quot;:&quot;&quot;,
+                     &quot;title&quot;:&quot;miss&quot;
+                  },
+                  &quot;dateOfBirth&quot;:&quot;2016-10-14&quot;,
+                  &quot;documentExpiryDate&quot;:&quot;2020-10-14&quot;,
+                  &quot;documentNumber&quot;:&quot;163563454&quot;,
+                  &quot;documentType&quot;:&quot;passport&quot;,
+                  &quot;gender&quot;:&quot;fenale&quot;,
+                  &quot;nationality&quot;:&quot;GBR&quot;,
+                  &quot;countryOfIssue&quot;:&quot;GBR&quot;
+               }
+            ],
+            &quot;savedSSRs&quot;:{  
+               &quot;ssrs&quot;:[  
+
+               ],
+               &quot;remarks&quot;:[  
+
+               ]
+            }
+         }
+      ],
+      &quot;comments&quot;:[  
+         {  
+            &quot;code&quot;:&quot;00564545&quot;,
+            &quot;description&quot;:&quot;Customer complained about onboard service...&quot;
+         }
+      ],
+      &quot;communicationPreferences&quot;:{  
+         &quot;optedOutMarketing&quot;:[  
+            &quot;3RD_PARTY_COMM&quot;
+         ],
+         &quot;optedOutPeriod&quot;:{  
+            &quot;fromDate&quot;:&quot;2016-10-14&quot;,
+            &quot;toDate&quot;:&quot;2016-10-14&quot;
+         },
+         &quot;contactMethods&quot;:[  
+            &quot;EMAIL&quot;
+         ],
+         &quot;contactTypes&quot;:[  
+            &quot;EASYJET_NEWSLETTER&quot;
+         ],
+         &quot;frequency&quot;:&quot;DAILY&quot;
+      },
+      &quot;travelPreferences&quot;:{  
+         &quot;preferredAirports&quot;:[  
+            &quot;GTW&quot;
+         ],
+         &quot;travellingTo&quot;:[  
+            &quot;VCE&quot;
+         ],
+         &quot;tripTypes&quot;:[  
+            &quot;CULTURE&quot;,
+            &quot;CITY_BREAK&quot;
+         ],
+         &quot;travellingWhen&quot;:[  
+            &quot;WITHIN_SIX_MONTHS&quot;
+         ],
+         &quot;travellingWith&quot;:[  
+            &quot;COUPLE&quot;
+         ],
+         &quot;travellingSeason&quot;:&quot;SUMMER&quot;,
+         &quot;travellingPeriod&quot;:{  
+            &quot;fromDate&quot;:&quot;2016-10-14&quot;,
+            &quot;toDate&quot;:&quot;2016-10-20&quot;
+         }
+      },
+      &quot;ancillaryPreferences&quot;:{  
+         &quot;seatingPreferences&quot;:[  
+            &quot;WINDOW&quot;
+         ],
+         &quot;seatNumber&quot;:&quot;1A&quot;,
+         &quot;holdBagQuantity&quot;:2,
+         &quot;holdBagWeight&quot;:&quot;23KG&quot;
+      },
+      &quot;savedInspireMeIdeas&quot;:[  
+         {  
+            &quot;currency&quot;:&quot;GBP&quot;,
+            &quot;price&quot;:123.45,
+            &quot;outbound&quot;:{  
+               &quot;flightKey&quot;:&quot;20121024LISFNC7609&quot;,
+               &quot;flightNumber&quot;:&quot;EZY1244&quot;,
+               &quot;carrier&quot;:&quot;EZY&quot;,
+               &quot;departureDateTime&quot;:&quot;2016-10-14T09:42:00&quot;,
+               &quot;arrivalDateTime&quot;:&quot;2016-10-14T11:42:00&quot;,
+               &quot;sector&quot;:{  
+                  &quot;code&quot;:&quot;LTNBCN&quot;,
+                  &quot;departure&quot;:{  
+                     &quot;code&quot;:&quot;LTN&quot;,
+                     &quot;name&quot;:&quot;Luton Airport&quot;,
+                     &quot;marketGroup&quot;:&quot;london&quot;,
+                     &quot;terminal&quot;:&quot;T1&quot;
+                  },
+                  &quot;arrival&quot;:{  
+                     &quot;code&quot;:&quot;BCN&quot;,
+                     &quot;name&quot;:&quot;Barcelona&quot;,
+                     &quot;marketGroup&quot;:&quot;&quot;,
+                     &quot;terminal&quot;:&quot;T2&quot;
+                  }
+               },
+               &quot;fareTypes&quot;:[  
+                  {  
+                     &quot;code&quot;:&quot;flexi&quot;
+                  }
+               ]
+            },
+            &quot;inbound&quot;:{  
+               &quot;flightKey&quot;:&quot;20121024LISFNC7609&quot;,
+               &quot;flightNumber&quot;:&quot;EZY1244&quot;,
+               &quot;carrier&quot;:&quot;EZY&quot;,
+               &quot;departureDateTime&quot;:&quot;2016-10-20T09:42:00&quot;,
+               &quot;arrivalDateTime&quot;:&quot;2016-10-20T11:42:00&quot;,
+               &quot;sector&quot;:{  
+                  &quot;code&quot;:&quot;BCNLTN&quot;,
+                  &quot;departure&quot;:{  
+                     &quot;code&quot;:&quot;BCN&quot;,
+                     &quot;name&quot;:&quot;Barcelona&quot;,
+                     &quot;marketGroup&quot;:&quot;&quot;,
+                     &quot;terminal&quot;:&quot;T2&quot;
+                  },
+                  &quot;arrival&quot;:{  
+                     &quot;code&quot;:&quot;LTN&quot;,
+                     &quot;name&quot;:&quot;Luton Airport&quot;,
+                     &quot;marketGroup&quot;:&quot;london&quot;,
+                     &quot;terminal&quot;:&quot;T1&quot;
+                  }
+               },
+               &quot;fareTypes&quot;:[  
+                  {  
+                     &quot;code&quot;:&quot;flexi&quot;
+                  }
+               ]
+            }
+         }
+      ],
+      &quot;savedDestinations&quot;:[  
+         &quot;http://www.easyjet.com/en/holidays/italy/&quot;
+      ],
+      &quot;savedBasketTrip&quot;:[  
+         &quot;00776564&quot;
+      ]
+   }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">com.customeraccountchangedv1.queue.produce</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_CustomerAccountChanged_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_CustomerAccountChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer.AL.VirtualTopic.com.customeraccountchangedv1</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="FlightFinancialStatusUpdated_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_FlightFinancialStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+
+  &quot;header&quot;: {
+
+    &quot;messageName&quot;: &quot;flightFinancialStatusUpdated_event&quot;,
+
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+
+  },
+
+  &quot;body&quot;: {
+
+    &quot;flightKey&quot;: &quot;20121024LISFNC7609&quot;,
+
+    &quot;financialStatusClosed&quot;: true
+
+  }
+
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">com.flightfinancialstatusupdatedv1.queue.produce</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_FlightFinancialStatusUpdated_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightFinancialStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer.AL.VirtualTopic.com.flightfinancialstatusupdatedv1</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BookingFraudStatusUpdated_001" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_BookingFraudStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_BookingFraudStatusUpdated_001" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_BookingFraudStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="AdvancePassengerInformationUpdated_001_update" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_AdvancePassengerInformationUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;AdvancePassengerInformationUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_AdvancePassengerInformationUpdated_001_update" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_AdvancePassengerInformationUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="PaymentStatusUpdated_001_update" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Payment Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_PaymentStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  header: {
+    messageName: &quot;FlightFareClassPriceChanged&quot;,
+    messageVersion: &quot;1.0&quot;,
+    messageGenerationTimestamp: &quot;2016-18-01T00:00:00Z&quot;,
+    messageProducerName: &quot;Abstraction Layer&quot;,
+    operationType: &quot;CREATE&quot;
+  },
+  body: {
+      flightKey: &quot;20160529PVKLGW8370&quot;,
+      fareClassCode: &quot;B&quot;,
+      currencyCode: &quot;GBP&quot;,
+      extendedPrice: &quot;20.00&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_PaymentStatusUpdated_001_update" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_PaymentStatusUpdated.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="FlightAircraftTypeChanged_001_update" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_FlightAircraftTypeChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  header: {
+    messageName: &quot;FlightFareClassPriceChanged&quot;,
+    messageVersion: &quot;1.0&quot;,
+    messageGenerationTimestamp: &quot;2016-18-01T00:00:00Z&quot;,
+    messageProducerName: &quot;Abstraction Layer&quot;,
+    operationType: &quot;CREATE&quot;
+  },
+  body: {
+      flightKey: &quot;20160529PVKLGW8370&quot;,
+      fareClassCode: &quot;B&quot;,
+      currencyCode: &quot;GBP&quot;,
+      extendedPrice: &quot;20.00&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_FlightAircraftTypeChanged_001_update" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_FlightAircraftTypeChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="PassengerICTSCheckStatusUpdatedInDCS_001_update" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_PassengerICTSCheckStatusUpdatedInDCS.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  header: {
+    messageName: &quot;FlightFareClassPriceChanged&quot;,
+    messageVersion: &quot;1.0&quot;,
+    messageGenerationTimestamp: &quot;2016-18-01T00:00:00Z&quot;,
+    messageProducerName: &quot;Abstraction Layer&quot;,
+    operationType: &quot;CREATE&quot;
+  },
+  body: {
+      flightKey: &quot;20160529PVKLGW8370&quot;,
+      fareClassCode: &quot;B&quot;,
+      currencyCode: &quot;GBP&quot;,
+      extendedPrice: &quot;20.00&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_PassengerICTSCheckStatusUpdatedInDCS_001_update" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_PassengerICTSCheckStatusUpdatedInDCS.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ProductBundlesChanged_001_update" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="Hybris Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_ProductBundlesChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  &quot;header&quot;: {
+    &quot;messageName&quot;: &quot;bookingFraudStatusUpdated_event&quot;,
+    &quot;messageVersion&quot;: &quot;1.0.0&quot;,
+    &quot;messageGenerationTimestamp&quot;: &quot;2016-12-13T12:12:12&quot;,
+    &quot;messageProducerName&quot;: &quot;ACP&quot;,
+    &quot;operationType&quot;: &quot;UPDATE&quot;
+  },
+  &quot;body&quot;: {
+    &quot;bookingReference&quot;: &quot;ELXS2BT&quot;,
+    &quot;bookingStatus&quot;: &quot;cancelled_by_revenue_protection&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="AL Consumer_ProductBundlesChanged_001_update" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_ProductBundlesChanged.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BookingUpdatedAtAirport_001_update" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1473075341000</longProp>
+        <longProp name="ThreadGroup.end_time">1473075341000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="AL Producer" enabled="false">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">./jndi/qpid_BookingUpdatedAtAirport.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueSource</stringProp>
+          <stringProp name="jms.expiration">10000</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <stringProp name="jms.text_message">{
+  header: {
+    messageName: &quot;FlightFareClassPriceChanged&quot;,
+    messageVersion: &quot;1.0&quot;,
+    messageGenerationTimestamp: &quot;2016-18-01T00:00:00Z&quot;,
+    messageProducerName: &quot;Abstraction Layer&quot;,
+    operationType: &quot;CREATE&quot;
+  },
+  body: {
+      flightKey: &quot;20160529PVKLGW8370&quot;,
+      fareClassCode: &quot;B&quot;,
+      currencyCode: &quot;GBP&quot;,
+      extendedPrice: &quot;20.00&quot;
+  }
+}</stringProp>
+          <stringProp name="jms.input_file"></stringProp>
+          <stringProp name="jms.random_path"></stringProp>
+          <stringProp name="jms.config_choice">jms_use_text</stringProp>
+          <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties"/>
+          </elementProp>
+          <stringProp name="TestPlan.comments">Producer Queue</stringProp>
+          <stringProp name="jms.priority"></stringProp>
+        </PublisherSampler>
+        <hashTree/>
+        <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="Hybris Consumer_BookingUpdatedAtAirport_001_update" enabled="true">
+          <stringProp name="jms.jndi_properties">false</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">/usr/local/easyJet/performance/sprint/qpid-properties/qpid_BookingUpdatedAtAirport.properties</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionFactory</stringProp>
+          <stringProp name="jms.topic">myQueueDestination</stringProp>
+          <stringProp name="jms.security_principle">admin</stringProp>
+          <stringProp name="jms.security_credentials">admin</stringProp>
+          <boolProp name="jms.authenticate">true</boolProp>
+          <stringProp name="jms.iterations">1</stringProp>
+          <stringProp name="jms.read_response">true</stringProp>
+          <stringProp name="jms.client_choice">jms_subscriber_on_message</stringProp>
+          <stringProp name="TestPlan.comments">Consumer Queue</stringProp>
+        </SubscriberSampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.perfmon.PerfMonCollector guiclass="kg.apc.jmeter.vizualizers.PerfMonGui" testclass="kg.apc.jmeter.perfmon.PerfMonCollector" testname="jp@gc - PerfMon Metrics Collector" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <longProp name="interval_grouping">1000</longProp>
+        <boolProp name="graph_aggregated">false</boolProp>
+        <stringProp name="include_sample_labels"></stringProp>
+        <stringProp name="exclude_sample_labels"></stringProp>
+        <stringProp name="start_offset"></stringProp>
+        <stringProp name="end_offset"></stringProp>
+        <boolProp name="include_checkbox_state">false</boolProp>
+        <boolProp name="exclude_checkbox_state">false</boolProp>
+        <collectionProp name="metricConnections"/>
+      </kg.apc.jmeter.perfmon.PerfMonCollector>
+      <hashTree/>
+      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <longProp name="interval_grouping">500</longProp>
+        <boolProp name="graph_aggregated">false</boolProp>
+        <stringProp name="include_sample_labels"></stringProp>
+        <stringProp name="exclude_sample_labels"></stringProp>
+        <stringProp name="start_offset"></stringProp>
+        <stringProp name="end_offset"></stringProp>
+        <boolProp name="include_checkbox_state">false</boolProp>
+        <boolProp name="exclude_checkbox_state">false</boolProp>
+      </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ThreadsStateOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Active Threads Over Time" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <longProp name="interval_grouping">500</longProp>
+        <boolProp name="graph_aggregated">false</boolProp>
+        <stringProp name="include_sample_labels"></stringProp>
+        <stringProp name="exclude_sample_labels"></stringProp>
+        <stringProp name="start_offset"></stringProp>
+        <stringProp name="end_offset"></stringProp>
+        <boolProp name="include_checkbox_state">false</boolProp>
+        <boolProp name="exclude_checkbox_state">false</boolProp>
+      </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
